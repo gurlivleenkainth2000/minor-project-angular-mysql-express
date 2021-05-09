@@ -13,7 +13,20 @@ const connection = mysql.createConnection({
     insecureAuth: true
 });
 
-connection.connect();
+connection.connect((error) => {
+    if(error) {
+        console.log(">>> Error: ", error);
+    } else {
+        connection.query(
+            'select * from mysql.user where user = ? ', 
+            [mysqlConfig.user],
+            (error, response) => {
+                console.log(">>> Query Error: ", error);
+                console.log(">>> Query Response: ", response);
+            }
+        )
+    }
+});
 
 const app = express()
     .use(cors())
