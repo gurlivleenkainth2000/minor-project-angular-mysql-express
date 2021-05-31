@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   constructor(private httpClient: HttpClient, private dialog: MatDialog) {}
 
   ngOnInit() {
-    this.getStudentRecods();
+    // this.getStudentRecods();
   }
 
   getStudentRecods() {

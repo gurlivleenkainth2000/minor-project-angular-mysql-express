@@ -13,12 +13,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StudentsComponent } from './entryComponent/students/students.component';
+import { LoginComponent } from './login/login.component';
+import { StaffLayoutComponent } from './layouts/staff-layout/staff-layout.component';
+import { StudentLayoutComponent } from './layouts/student-layout/student-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentsComponent
+    StudentsComponent,
+    LoginComponent,
+    StaffLayoutComponent,
+    StudentLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +41,7 @@ import { StudentsComponent } from './entryComponent/students/students.component'
     MatIconModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

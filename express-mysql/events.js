@@ -6,7 +6,7 @@ const ROUTES = (database) => {
   const router = express.Router();
   // console.log(">>> Database Connection: ", database);
 
-  router.get("/login", (req, res, next) => {
+  router.post("/login", (req, res, next) => {
     const client = ldap.createClient({
       url: "ldap://auth.gndec.ac.in",
       bindDN: `ou=people,dc=auth,dc=gndec,dc=ac,dc=in`,
@@ -25,7 +25,7 @@ const ROUTES = (database) => {
             `select * from ${tables.studentInfo} where college_roll_no = ${req.body.username}`,
             (stdError, stdResult) => {
               if (stdError) {
-                  res.send({ status: "error", loginType: null, error: userError, response: null });
+                res.send({ status: "error", loginType: null, error: userError, response: null });
               }
 
               if (stdResult.length != 0) {
@@ -35,13 +35,13 @@ const ROUTES = (database) => {
                   `select * from ${tables.users} where username = ${req.body.username}`,
                   (userError, userResult) => {
                     if(userError) {
-                        res.send({ status: "error", loginType: null, error: userError, response: null });
+                      res.send({ status: "error", loginType: null, error: userError, response: null });
                     }
 
                     if (userResult.length != 0) {
-                        res.send({ status: "ok", loginType: "staff", error: null, response: userResult });
+                      res.send({ status: "ok", loginType: "staff", error: null, response: userResult });
                     } else {
-                        res.send({ status: "ok", loginType: null, error: null, response: `No Record Found Related ${req.body.username}` });
+                      res.send({ status: "error", loginType: null, error: `No Record Found Related ${req.body.username}` , response: null});
                     }
                   }
                 );
