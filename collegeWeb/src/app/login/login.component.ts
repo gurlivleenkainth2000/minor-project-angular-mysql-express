@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-
+import * as util from './../utils';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +40,14 @@ export class LoginComponent implements OnInit {
           this.message = response['loginType'] + " Login Successfully";
           localStorage.setItem('userObj', JSON.stringify({ ...response['response'][0] }));
           localStorage.setItem('loginType', JSON.stringify(response['loginType']));
+
+          if(response['loginType'] == util.STAFF_LOGIN) {
+            this.router.navigate(['staff-dashboard']);
+          }
+
+          if(response['loginType'] == util.STUDENT_LOGIN) {
+            this.router.navigate(['student-dashboard']);
+          }
         }
 
         if(response['status'] == "error") {

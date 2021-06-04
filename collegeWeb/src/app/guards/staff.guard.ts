@@ -12,12 +12,13 @@ export class StaffGuard implements CanActivate {
   ){ }
 
   canActivate(): boolean {
-    if(localStorage.getItem('loginType') == STAFF_LOGIN) {
-      return true;
+    if(JSON.parse(localStorage.getItem('loginType')) != STAFF_LOGIN) {
+      localStorage.clear();
+      this.router.navigate(['login']);
+      return false;
     }
 
-    this.router.navigate(['login']);
-    return false;
+    return true;
   }
 
 }

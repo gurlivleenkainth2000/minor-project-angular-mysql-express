@@ -12,12 +12,13 @@ export class StudentGuard implements CanActivate {
   ){ }
 
   canActivate( ): boolean {
-    if(localStorage.getItem('loginType') == STUDENT_LOGIN) {
-      return true;
+    if(JSON.parse(localStorage.getItem('loginType')) != STUDENT_LOGIN) {
+      localStorage.clear();
+      this.router.navigate(['login']);
+      return false;
     }
 
-    this.router.navigate(['login']);
-    return false;
+    return true;
   }
 
 }
