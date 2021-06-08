@@ -2,7 +2,7 @@ const express = require("express");
 const ldap = require("ldapjs");
 const { tables } = require("./config");
 
-const ROUTES = (database) => {
+const routes = (database) => {
   const router = express.Router();
   // console.log(">>> Database Connection: ", database);
 
@@ -53,11 +53,18 @@ const ROUTES = (database) => {
     );
   });
 
-  router.get("/tables-info", (req, res, next) => {
-    database.query(`select * from ${req.body.table}`, (error, response) => {
-      res.send({ status: "ok", error: error, response: response });
-    });
-  });
+  router.post('/requests', (req, res, next) => {
+    console.log(req.body);
+    database.query(
+      `insert into ${tables.requestTable} values ?`,
+      [ req.body.data ],
+      (error, response) => {
+        console.log(">>> Error: ", error);
+        console.log(">>> Response: ", response);
+
+      }
+    )
+  })
 
   // Adding New Student To Database
   router.post("/students", (req, res, next) => {
@@ -129,4 +136,4 @@ const ROUTES = (database) => {
   return router;
 };
 
-module.exports = ROUTES;
+module.exports = { routes };

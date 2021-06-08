@@ -31,6 +31,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(form: FormGroup) {
+    if(form.invalid) {
+      this.errorMsg = "username or password field is empty";
+      return;
+    }
     this.message = this.errorMsg = null;
     this.loader = true;
     this.http.post(`${environment.serverUrl}/login`, form.value)

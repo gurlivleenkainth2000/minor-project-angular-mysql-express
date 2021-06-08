@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,22 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { StudentsComponent } from './entryComponent/students/students.component';
 import { LoginComponent } from './login/login.component';
 import { StaffLayoutComponent } from './layouts/staff-layout/staff-layout.component';
 import { StudentLayoutComponent } from './layouts/student-layout/student-layout.component';
+import { DatabaseService } from './services/database.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentsComponent,
     LoginComponent,
     StaffLayoutComponent,
     StudentLayoutComponent
@@ -35,18 +27,9 @@ import { StudentLayoutComponent } from './layouts/student-layout/student-layout.
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [DatabaseService],
   bootstrap: [AppComponent],
-  entryComponents: [
-    StudentsComponent
-  ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

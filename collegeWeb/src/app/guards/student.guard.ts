@@ -13,7 +13,7 @@ export class StudentGuard implements CanActivate {
 
   canActivate( ): boolean {
     if(JSON.parse(localStorage.getItem('loginType')) != STUDENT_LOGIN) {
-      localStorage.clear();
+
       this.router.navigate(['login']);
       return false;
     }

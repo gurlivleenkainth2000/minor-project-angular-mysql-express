@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors"); // Cross-Origin Resource Sharing
-const bodyParser = require("body-parser");
 const mysql = require("mysql");
+
 const { mysqlConfig } = require("./config");
-const routes = require("./events");
+const { routes } = require("./events");
+const { tablesRoutes } = require('./tables');
 
 const connection = mysql.createConnection({
   host: mysqlConfig.host,
@@ -100,7 +101,8 @@ const app = express()
   .use(cors())
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
-  .use(routes(connection));
+  .use(routes(connection))
+  .use(tablesRoutes(connection));
 
 const PORT = process.env.PORT || 3000;
 

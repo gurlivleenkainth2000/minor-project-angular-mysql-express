@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { StaffLayoutRoutingModule } from './staff-layout-routing.module';
-import { StaffDashBoardComponent } from '../../pages/staff-dash-board/staff-dash-board.component';
-
-
+import { StaffDashBoardComponent } from '../../pages/staff-dashboard/staff-dashboard.component';
 @NgModule({
   declarations: [
     StaffDashBoardComponent

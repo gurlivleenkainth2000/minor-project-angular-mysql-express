@@ -7,7 +7,7 @@ import { StudentLayoutComponent } from './layouts/student-layout/student-layout.
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "staff-dashboard", pathMatch: "full" },
+  // { path: "", redirectTo: "staff-dashboard", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   {
     path: "",

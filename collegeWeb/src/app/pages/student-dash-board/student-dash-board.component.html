@@ -1,1 +1,14 @@
-<p>student-dash-board works!</p>
+<div class="row p-2">
+  <div class="col d-flex align-items-end justify-content-end">
+    <button class="btn btn-outline-primary" (click)="requestNoDuesCertificate()">Request No Dues Certificate</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col" *ngFor="let head of msg">
+    {{ head }}
+  </div>
+  <div class="col">
+    {{ values }}
+  </div>
+</div>
