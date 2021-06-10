@@ -5,10 +5,30 @@
 </div>
 
 <div class="row">
-  <div class="col" *ngFor="let head of msg">
-    {{ head }}
-  </div>
   <div class="col">
-    {{ values }}
+    <table class="table table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th>Sr. No</th>
+          <th>University Roll No</th>
+          <th>Verfied By</th>
+          <th>Verification Status</th>
+          <th>Amount</th>
+          <th>Request Created</th>
+          <th>Request Accepted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of requestTable; index as idx">
+          <td>{{ idx + 1 }}</td>
+          <td>{{ request['university_roll_no'] }}</td>
+          <td>{{ request['verified_by'] }}</td>
+          <td>{{ request['verified'] ? 'Verified' : 'Not Verified' }}</td>
+          <td>{{ request['dues'] }}</td>
+          <td>{{ request['requestCreated'] }}</td>
+          <td>{{ request['requestAccepted'] || 'Not Accepted Yet' }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

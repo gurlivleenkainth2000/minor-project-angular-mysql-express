@@ -22,7 +22,7 @@ const routes = (database) => {
         if (response) {
           // res.json({status: "ok", data: response })
           database.query(
-            `select * from ${tables.studentInfo} where college_roll_no = ${req.body.username}`,
+            `select * from ${tables.studentInfo} where college_roll_no = ${req.body.username}`, 
             (stdError, stdResult) => {
               if (stdError) {
                 res.send({ status: "error", loginType: null, error: userError, response: null });
@@ -53,6 +53,7 @@ const routes = (database) => {
     );
   });
 
+  // Request Saving
   router.post('/requests', (req, res, next) => {
     console.log(req.body);
     database.query(
@@ -63,8 +64,26 @@ const routes = (database) => {
         console.log(">>> Response: ", response);
 
       }
-    )
-  })
+    );
+  });
+
+  // Getting Requests Details
+  router.get('/get-requests', (req, res, next) => {
+    database.query(
+      `select * from ${tables.requestTable} where verified_by=? and show_branch_code=?`,
+      [req.body.userType, req.body.branchCode],
+      (error, response) => {
+        if(error) {
+          res.send({ status: "error", error: error, response: null })
+        }
+        
+        if(response) {
+          console.log(">>> Response: ", response);
+          res.send({ status: "ok", error: null, response: response });
+        }
+      }
+    );
+  });
 
   // Adding New Student To Database
   router.post("/students", (req, res, next) => {
